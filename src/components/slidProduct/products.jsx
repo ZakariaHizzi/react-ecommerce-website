@@ -9,14 +9,21 @@ import {
 import "./product.css";
 import { Link, useNavigate } from "react-router-dom";
 import { cartContext } from "../../context/contextcategory";
+import { authContext } from "../../context/authcontext";
 import toast from "react-hot-toast";
 
 function Products({ item, categoty }) {
   const navigate = useNavigate();
   const { cartItem, addItem } = useContext(cartContext);
+  const { isAuthenticated } = useContext(authContext);
 
   const isincart = cartItem.some((i) => i.id === item.id);
   const hundelAddItem = () => {
+    if (!isAuthenticated) {
+      toast.error("Please login to add items to cart");
+      navigate("/login");
+      return;
+    }
     addItem(item);
     toast.success(
       <div className="toast-wapper">
@@ -25,7 +32,7 @@ function Products({ item, categoty }) {
           <strong>{item.title}</strong>
           added to cart
         </div>{" "}
-        <button className="btn" onClick={() => navigate("/home/cart")}>
+        <button className="btn" onClick={() => navigate("/cart")}>
           View in cart
         </button>
       </div>,
@@ -34,7 +41,7 @@ function Products({ item, categoty }) {
   };
   return (
     <div className={`product ${isincart ? "incart" : ""}`}>
-      <Link to={`/home/products/${item.id}`}>
+      <Link to={`/products/${item.id}`}>
         {isincart ? (
           <span className="status">
             <FaCheck /> in cart

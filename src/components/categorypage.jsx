@@ -79,7 +79,7 @@ function Categorypage() {
             >
               {categoryPoducts.map((item) => (
                 <SwiperSlide>
-                  <Link to={`/home/${category}/products/${item.id}`}>
+                  <Link to={`/${category}/products/${item.id}`}>
                     <Products item={item} category={category} />
                   </Link>
                 </SwiperSlide>

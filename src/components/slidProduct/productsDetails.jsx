@@ -7,12 +7,14 @@ import "./product.css";
 import { TiShoppingCart } from "react-icons/ti";
 import { FaStar, FaRegHeart, FaShare } from "react-icons/fa";
 import { cartContext } from "../../context/contextcategory";
+import { authContext } from "../../context/authcontext";
 import toast from "react-hot-toast";
 import Pagetransition from "../pagetransition";
 import Productdetailsloading from "./productdetailsloading";
 
 function ProductsDetails() {
   const { addItem, cartItem } = useContext(cartContext);
+  const { isAuthenticated } = useContext(authContext);
   const { id } = useParams();
   const [product, setproduct] = useState();
   const [loading, setloading] = useState(true);
@@ -36,6 +38,11 @@ function ProductsDetails() {
     isincart = cartItem.some((i) => i.id === product.id);
   }
   const hundelAddItem = (item) => {
+    if (!isAuthenticated) {
+      toast.error("Please login to add items to cart");
+      navigate("/login");
+      return;
+    }
     addItem(item);
     toast.success(
       <div className="toast-wapper">
@@ -44,7 +51,7 @@ function ProductsDetails() {
           <strong>{item.title}</strong>
           added to cart
         </div>
-        <button className="btn" onClick={() => navigate("/home/cart")}>
+        <button className="btn" onClick={() => navigate("/cart")}>
           View in cart
         </button>
       </div>,

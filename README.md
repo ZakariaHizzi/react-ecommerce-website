@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# React E-Commerce Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern e-commerce web application built with **React 19**, featuring product browsing, shopping cart management, and user authentication.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Product Catalog** — Browse products by categories (laptops, smartphones, shirts, shoes, watches, etc.) using the [DummyJSON API](https://dummyjson.com/)
+- **Product Details** — View product descriptions, images, pricing, and reviews
+- **Shopping Cart** — Add/remove items, adjust quantities, with persistent storage via `localStorage`
+- **User Authentication** — Sign up, log in, and session management powered by **Supabase Auth**
+- **Protected Routes** — Cart page is accessible only to authenticated users
+- **Animations** — Page transitions and UI animations using **Framer Motion**
+- **Responsive Design** — Optimized for various screen sizes with modern CSS
+- **Toast Notifications** — User-friendly feedback with **React Hot Toast**
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| Technology       | Purpose                       |
+| ---------------- | ------------------------------ |
+| React 19         | UI framework                  |
+| React Router v7  | Client-side routing           |
+| Supabase         | Authentication & backend      |
+| Framer Motion    | Page/component animations     |
+| Swiper           | Product image sliders         |
+| React Hot Toast  | Notification toasts           |
+| React Icons      | Icon library                  |
+| DummyJSON API    | Product data source           |
+| Create React App | Build tooling & dev server    |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (v16 or later)
+- npm
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository:
+   ```bash
+   git clone <repo-url>
+   cd reactecommercewebsite
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Set up environment variables in a `.env` file:
+   ```
+   REACT_APP_SUPABASE_URL=your_supabase_url
+   REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
 
-### `npm run eject`
+4. Start the development server:
+   ```bash
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Available Scripts
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Command           | Description                     |
+| ----------------- | ------------------------------- |
+| `npm start`       | Start development server       |
+| `npm run build`   | Build for production           |
+| `npm test`        | Run test suite                 |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Environment Variables
 
-## Learn More
+| Variable                     | Description                |
+| ---------------------------- | -------------------------- |
+| `REACT_APP_SUPABASE_URL`     | Supabase project URL       |
+| `REACT_APP_SUPABASE_ANON_KEY` | Supabase anonymous API key |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Project Structure
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+src/
+├── components/
+│   ├── header.jsx
+│   ├── topheader.jsx
+│   ├── bottumheader.jsx
+│   ├── Heroslider.jsx
+│   ├── Home.jsx
+│   ├── Login.jsx
+│   ├── createAcount.jsx
+│   ├── categorypage.jsx
+│   ├── pagetransition.jsx
+│   ├── taostmessage.jsx
+│   ├── ProtectedRoute.jsx
+│   └── slidProduct/
+│       ├── products.jsx
+│       ├── productsDetails.jsx
+│       ├── sliderProduct.jsx
+│       ├── productloading.jsx
+│       ├── productdetailsloading.jsx
+│       └── cart.jsx
+├── context/
+│   ├── authcontext.jsx       # Supabase authentication context
+│   └── contextcategory.jsx   # Cart state & category definitions
+├── footer.jsx
+├── supabaseClient.js
+├── App.jsx
+└── index.js
+```
 
-### Code Splitting
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is for educational/demonstration purposes.

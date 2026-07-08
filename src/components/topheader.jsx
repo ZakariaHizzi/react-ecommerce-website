@@ -29,7 +29,7 @@ function Topheader() {
           <IoIosMenu />
         </div>
 
-        <Link to="/home">
+        <Link to="/">
           <img className="logo" src={logo} alt="" />
         </Link>
         <div
@@ -49,7 +49,7 @@ function Topheader() {
 
           {navliks.map((c) => (
             <li className={location.pathname === c.link ? "active" : ""}>
-              <Link to={"/home"}>{c.title}</Link>
+              <Link to={"/"}>{c.title}</Link>
             </li>
           ))}
         </div>
@@ -60,11 +60,12 @@ function Topheader() {
           </div>
 
           <div className="icon">
-            <Link to="/home/cart">
+            <Link to="/cart">
               <FaShoppingCart />
               <span className="count">{cartItem.length}</span>
             </Link>
           </div>
+
         </div>
       </div>
     </div>

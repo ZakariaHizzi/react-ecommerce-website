@@ -5,7 +5,9 @@ import Home from "./components/Home";
 import ProductsDetails from "./components/slidProduct/productsDetails";
 import { useEffect, useState } from "react";
 import { cartContext } from "./context/contextcategory";
+import { AuthProvider } from "./context/authcontext";
 import Cart from "./components/slidProduct/cart";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import { AnimatePresence } from "motion/react";
 import Categorypage from "./components/categorypage";
@@ -56,32 +58,41 @@ function App() {
           deleteitem,
         }}
       >
-        <Toaster
-          position="bottom-right"
-          toastOptions={{
-            style: {
-              background: "#e9E9E98",
-              borderRadius: "5px",
-              padding: "10px",
-            },
-          }}
-        />
-        <AnimatePresence mode="wait">
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/home/cart" element={<Cart />} />
-            <Route path="/home/products/:id" element={<ProductsDetails />} />
-            <Route
-              path="/homecategory/:category/products/:id"
-              element={<ProductsDetails />}
-            />
-            <Route path="/home/category/:category" element={<Categorypage />} />
-            <Route path="/home" element={<Header />} />
-            <Route path="/home" element={<Footer />} />
-            <Route path="/createaccount" element={<CreateAccount />} />
-          </Routes>
-        </AnimatePresence>
+        <AuthProvider>
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              style: {
+                background: "#e9E9E98",
+                borderRadius: "5px",
+                padding: "10px",
+              },
+            }}
+          />
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/createaccount" element={<CreateAccount />} />
+              <Route
+                path="/cart"
+                element={
+                  <ProtectedRoute>
+                    <Cart />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/products/:id" element={<ProductsDetails />} />
+              <Route
+                path="/homecategory/:category/products/:id"
+                element={<ProductsDetails />}
+              />
+              <Route path="/category/:category" element={<Categorypage />} />
+              <Route path="/" element={<Header />} />
+              <Route path="/" element={<Footer />} />
+            </Routes>
+          </AnimatePresence>
+        </AuthProvider>
       </cartContext.Provider>
     </div>
   );
