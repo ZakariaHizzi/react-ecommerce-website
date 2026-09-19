@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../context/authcontext";
-import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaArrowLeft, FaHome } from "react-icons/fa";
 import "../index.css";
 import Pagetransition from "./pagetransition";
 
@@ -31,6 +31,9 @@ export default function Login() {
     <Pagetransition>
       <div className="auth-page">
         <div className="auth-card">
+          <Link to="/" className="auth-back-home">
+            <FaArrowLeft /> <FaHome /> Back to Home
+          </Link>
           <div className="auth-header">
             <h1 className="auth-title">Welcome Back</h1>
             <p className="auth-subtitle">Sign in to continue shopping</p>

@@ -44,7 +44,7 @@ function Categorypage() {
         <div
           className="slider-product "
           style={{
-            marginTop: "150px",
+            marginTop: "80px",
           }}
         >
           <div className="container">

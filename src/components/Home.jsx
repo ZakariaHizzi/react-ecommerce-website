@@ -1,56 +1,64 @@
 import { useEffect, useState } from "react";
-import Heroslider from "./Heroslider";
-import SliderProduct from "./slidProduct/sliderProduct";
 import Pagetransition from "./pagetransition";
-import { categories } from "../context/contextcategory";
-import Productloading from "./slidProduct/productloading";
 import Header from "./header";
 import Footer from "../footer";
+import { categories } from "../context/contextcategory";
+import Productloading from "./slidProduct/productloading";
+import HomeHero from "./home/HomeHero";
+import FeaturedCategories from "./home/FeaturedCategories";
+import BestSellers from "./home/BestSellers";
+import WhyUs from "./home/WhyUs";
 
 function Home() {
-  const [products, setproducts] = useState();
-  const [loading, setloading] = useState(true);
+  const [featuredCategories, setFeaturedCategories] = useState([]);
+  const [bestSellers, setBestSellers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchHomeData = async () => {
       try {
-        const result = await Promise.all(
+        const categoryResults = await Promise.all(
           categories.map(async (category) => {
             const res = await fetch(
-              "https://dummyjson.com/products/category/" + category.slug,
+              `https://dummyjson.com/products/category/${category.slug}?limit=1`,
             );
             const data = await res.json();
-            return { [category.slug]: data.products };
+            return {
+              ...category,
+              image: data.products[0]?.images[0],
+            };
           }),
         );
-        const productsdata = Object.assign({}, ...result);
-        setproducts(productsdata);
+        const bestRes = await fetch(
+          "https://dummyjson.com/products?limit=8&sortBy=rating&order=desc",
+        );
+        const bestData = await bestRes.json();
+        setFeaturedCategories(categoryResults);
+        setBestSellers(bestData.products);
       } catch (error) {
         console.error("error", error);
       } finally {
-        setloading(false);
+        setLoading(false);
       }
     };
-    fetchProducts();
+    fetchHomeData();
   }, []);
-  console.log(products);
+
   return (
     <>
       <Header />
       <Pagetransition>
         <div>
-          <Heroslider />
+          <HomeHero />
           {loading ? (
             <Productloading />
           ) : (
-            categories.map((category) => (
-              <SliderProduct
-                title={category.name}
-                description="add bestselling to weekly line up"
-                data={products[category.slug]}
-              />
-            ))
+            <>
+              <FeaturedCategories categories={featuredCategories} />
+              <BestSellers products={bestSellers} />
+            </>
           )}
+          <WhyUs />
         </div>
       </Pagetransition>
       <Footer />

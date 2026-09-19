@@ -1,66 +1,84 @@
-import { IoIosMenu, IoMdArrowDropdown } from "react-icons/io";
 import { Link, useLocation } from "react-router-dom";
-import { categories } from "../context/contextcategory";
-import { FaSignInAlt, FaUserPlus, FaSignOutAlt, FaUser } from "react-icons/fa";
-import { useContext, useEffect, useState } from "react";
+import { cartContext } from "../context/contextcategory";
+import {
+  FaSignOutAlt,
+  FaUser,
+  FaHome,
+  FaBoxOpen,
+  FaSignInAlt,
+  FaUserPlus,
+  FaShoppingCart,
+} from "react-icons/fa";
+import { useContext } from "react";
 import { authContext } from "../context/authcontext";
+import Searchbar from "./searchbar";
 
 function Bottumheader() {
   const location = useLocation();
   const { user, isAuthenticated, logout } = useContext(authContext);
-  const [isCategoryOpen, setisCategoryOpen] = useState(false);
-
-  useEffect(() => {
-    setisCategoryOpen(false);
-  }, [location]);
+  const { cartItem } = useContext(cartContext);
 
   return (
     <div>
       <div className="btm-header">
         <div className="container">
           <nav className="nav">
-            <div className="category-nav">
-              <div
-                className="category-btn"
-                onClick={() => {
-                  setisCategoryOpen(!isCategoryOpen);
-                }}
-              >
-                <IoIosMenu />
-                <p>Browser Category</p>
-                <IoMdArrowDropdown />
-              </div>
-              <div
-                className={
-                  isCategoryOpen
-                    ? "category-nav-list active"
-                    : "category-nav-list"
-                }
-              >
-                {categories.map((c) => (
-                  <Link to={`/category/${c.slug}`}>{c.name}</Link>
-                ))}
-              </div>
-            </div>
+            <Link
+              to="/"
+              className={`nav-link ${
+                location.pathname === "/" ? "active" : ""
+              }`}
+            >
+              <FaHome /> Home
+            </Link>
+            <Link
+              to="/products"
+              className={`nav-link ${
+                location.pathname === "/products" ? "active" : ""
+              }`}
+            >
+              <FaBoxOpen /> All Products
+            </Link>
           </nav>
+          <Searchbar />
           <div className="sign-regester">
             {isAuthenticated ? (
               <>
+                <Link
+                  to="/cart"
+                  className="btm-auth-link cart-link"
+                  title="Cart"
+                >
+                  <FaShoppingCart />
+                  <span className="count">{cartItem.length}</span>
+                </Link>
                 <span className="btm-user-name">
                   <FaUser />
-                  <span>{user.user_metadata?.first_name || user.user_metadata?.firstName || user.email?.split("@")[0]}</span>
+                  <span>
+                    {user.user_metadata?.first_name ||
+                      user.user_metadata?.firstName ||
+                      user.email?.split("@")[0]}
+                  </span>
                 </span>
-                <button className="btm-logout-btn" onClick={logout} title="Logout">
+                <button
+                  className="btm-logout-btn"
+                  onClick={logout}
+                  title="Logout"
+                >
                   <FaSignOutAlt />
                 </button>
               </>
             ) : (
               <>
                 <Link to="/login" className="btm-auth-link" title="Login">
-                  <FaSignInAlt />
+                  <FaSignInAlt /> Login
                 </Link>
-                <Link to="/createaccount" className="btm-auth-link" title="Sign Up">
-                  <FaUserPlus />
+                <Link
+                  to="/createaccount"
+                  className="btm-auth-link"
+                  title="Sign Up"
+                >
+                  <FaUserPlus /> Sign Up
                 </Link>
               </>
             )}

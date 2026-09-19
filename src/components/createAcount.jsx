@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { authContext } from "../context/authcontext";
-import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaArrowLeft, FaHome } from "react-icons/fa";
 import Pagetransition from "./pagetransition";
 
 export default function CreateAccount() {
@@ -48,6 +48,9 @@ export default function CreateAccount() {
       <div className="auth-page">
         {successMsg ? (
           <div className="auth-card">
+            <Link to="/" className="auth-back-home">
+              <FaArrowLeft /> <FaHome /> Back to Home
+            </Link>
             <div className="auth-header">
               <h1 className="auth-title">Check Your Email</h1>
               <p className="auth-subtitle">We sent you a confirmation link</p>
@@ -64,6 +67,9 @@ export default function CreateAccount() {
           </div>
         ) : (
           <div className="auth-card">
+            <Link to="/" className="auth-back-home">
+              <FaArrowLeft /> <FaHome /> Back to Home
+            </Link>
             <div className="auth-header">
               <h1 className="auth-title">Create Account</h1>
               <p className="auth-subtitle">Join us and start shopping</p>

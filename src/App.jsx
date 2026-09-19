@@ -7,10 +7,12 @@ import { useEffect, useState } from "react";
 import { cartContext } from "./context/contextcategory";
 import { AuthProvider } from "./context/authcontext";
 import Cart from "./components/slidProduct/cart";
+import Checkout from "./components/checkout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import { AnimatePresence } from "motion/react";
 import Categorypage from "./components/categorypage";
+import Allproducts from "./components/Allproducts";
 import Footer from "./footer";
 import CreateAccount from "./components/createAcount";
 
@@ -44,6 +46,9 @@ function App() {
   const addItem = (item) => {
     setcartItem((pervItem) => [...pervItem, { ...item, quantity: 1 }]);
   };
+  const clearCart = () => {
+    setcartItem([]);
+  };
   useEffect(() => {
     localStorage.setItem("cartItem", JSON.stringify(cartItem));
   }, [cartItem]);
@@ -56,6 +61,7 @@ function App() {
           increaseQuantity,
           decreaseQuantity,
           deleteitem,
+          clearCart,
         }}
       >
         <AuthProvider>
@@ -82,12 +88,21 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route
+                path="/checkout"
+                element={
+                  <ProtectedRoute>
+                    <Checkout />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/products/:id" element={<ProductsDetails />} />
               <Route
                 path="/homecategory/:category/products/:id"
                 element={<ProductsDetails />}
               />
               <Route path="/category/:category" element={<Categorypage />} />
+              <Route path="/products" element={<Allproducts />} />
               <Route path="/" element={<Header />} />
               <Route path="/" element={<Footer />} />
             </Routes>
