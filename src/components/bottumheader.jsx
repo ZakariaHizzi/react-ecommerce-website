@@ -25,19 +25,21 @@ function Bottumheader() {
           <nav className="nav">
             <Link
               to="/"
+              title="Home"
               className={`nav-link ${
                 location.pathname === "/" ? "active" : ""
               }`}
             >
-              <FaHome /> Home
+              <FaHome /> <span className="nav-text">Home</span>
             </Link>
             <Link
               to="/products"
+              title="All Products"
               className={`nav-link ${
                 location.pathname === "/products" ? "active" : ""
               }`}
             >
-              <FaBoxOpen /> All Products
+              <FaBoxOpen /> <span className="nav-text">All Products</span>
             </Link>
           </nav>
           <Searchbar />
@@ -71,14 +73,14 @@ function Bottumheader() {
             ) : (
               <>
                 <Link to="/login" className="btm-auth-link" title="Login">
-                  <FaSignInAlt /> Login
+                  <FaSignInAlt /> <span className="btm-auth-text">Login</span>
                 </Link>
                 <Link
                   to="/createaccount"
                   className="btm-auth-link"
                   title="Sign Up"
                 >
-                  <FaUserPlus /> Sign Up
+                  <FaUserPlus /> <span className="btm-auth-text">Sign Up</span>
                 </Link>
               </>
             )}

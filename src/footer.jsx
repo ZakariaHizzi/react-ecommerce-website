@@ -18,23 +18,7 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="container">
-        <div className="footer-newsletter">
-          <div className="newsletter-text">
-            <h3>Stay in the loop</h3>
-            <p>Subscribe for new arrivals and exclusive offers.</p>
-          </div>
-          <form
-            className="newsletter-form"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <input type="email" placeholder="Enter your email" required />
-            <button className="btn newsletter-btn" type="submit">
-              Subscribe
-            </button>
-          </form>
-        </div>
-
-        <div className="footer-top">
+        <div className="footer-top" style={{ paddingTop: "20px" }}>
           <div className="footer-brand">
             <p className="brand-desc">
               Your one-stop shop for quality products with fast delivery, secure

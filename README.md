@@ -7,7 +7,7 @@ A modern e-commerce web application built with **React 19**, featuring product b
 - **Product Catalog** — Browse products by categories (laptops, smartphones, shirts, shoes, watches, etc.) using the [DummyJSON API](https://dummyjson.com/)
 - **Product Details** — View product descriptions, images, pricing, and reviews
 - **Shopping Cart** — Add/remove items, adjust quantities, with persistent storage via `localStorage`
-- **User Authentication** — Sign up, log in, and session management powered by **Supabase Auth**
+- **User Authentication** — Sign up, log in, logout, and persistent sessions stored locally in the browser (demo-only, no backend required)
 - **Protected Routes** — Cart page is accessible only to authenticated users
 - **Animations** — Page transitions and UI animations using **Framer Motion**
 - **Responsive Design** — Optimized for various screen sizes with modern CSS
@@ -19,7 +19,7 @@ A modern e-commerce web application built with **React 19**, featuring product b
 | ---------------- | ------------------------------ |
 | React 19         | UI framework                  |
 | React Router v7  | Client-side routing           |
-| Supabase         | Authentication & backend      |
+| localStorage     | Local account & session store |
 | Framer Motion    | Page/component animations     |
 | Swiper           | Product image sliders         |
 | React Hot Toast  | Notification toasts           |
@@ -47,13 +47,7 @@ A modern e-commerce web application built with **React 19**, featuring product b
    npm install
    ```
 
-3. Set up environment variables in a `.env` file:
-   ```
-   REACT_APP_SUPABASE_URL=your_supabase_url
-   REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
-   ```
-
-4. Start the development server:
+3. Start the development server:
    ```bash
    npm start
    ```
@@ -68,12 +62,14 @@ A modern e-commerce web application built with **React 19**, featuring product b
 | `npm run build`   | Build for production           |
 | `npm test`        | Run test suite                 |
 
-## Environment Variables
+## Authentication
 
-| Variable                     | Description                |
-| ---------------------------- | -------------------------- |
-| `REACT_APP_SUPABASE_URL`     | Supabase project URL       |
-| `REACT_APP_SUPABASE_ANON_KEY` | Supabase anonymous API key |
+Accounts are stored in the browser's `localStorage` (keys `shop_auth_users` and
+`shop_auth_session`). This means login works immediately with no server setup,
+but accounts are per-browser and are **not** production-grade security.
+
+To reset all local accounts, open DevTools → Application → Local Storage and
+delete the `shop_auth_users` and `shop_auth_session` keys.
 
 ## Project Structure
 

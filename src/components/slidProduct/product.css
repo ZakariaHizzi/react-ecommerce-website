@@ -1396,3 +1396,13 @@
     padding: 36px 20px;
   }
 }
+
+/* Keep page content clear of the taller fixed header on small screens */
+@media (max-width: 750px) {
+  .item-details {
+    margin-top: 108px !important;
+  }
+  .chekout {
+    margin-top: 108px;
+  }
+}
